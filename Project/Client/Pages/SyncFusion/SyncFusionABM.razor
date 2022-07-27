@@ -1,0 +1,701 @@
+﻿<h3>SyncFusionABM</h3>
+
+@page "/SyncFusionABM"
+@using Project.Client.Pages.Clientes
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Buttons
+
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using static Project.Client.Pages.Clientes.Domain
+@inject IJSRuntime JsRuntime
+@inject IMostrarMensajes mostrarMensajes
+
+<SfToast @ref="ToastObj" Title="     Elimninar Registro Cliente" Width="280" Height="120" Icon="e-laura" Content="Va a Eliminar el Registro">
+    <ToastPosition X="Center" Y="Top"></ToastPosition>
+    <ToastButtons>
+        <ToastButton Content="Aceptar" OnClick="@EliminarRegistro"></ToastButton>
+        <ToastButton Content="Cancelar" OnClick="@HideToast"></ToastButton>
+    </ToastButtons>
+</SfToast>
+<SfToast @ref="ToastPedidoObj" Title="     Elimninar Registro Pedido" Width="280" Height="120" Icon="e-laura" Content="Va a Eliminar el Registro">
+    <ToastPosition X="Center" Y="Top"></ToastPosition>
+    <ToastButtons>
+        <ToastButton Content="Aceptar" OnClick="@EliminarPedidoRegistro"></ToastButton>
+        <ToastButton Content="Cancelar" OnClick="@HidePedidoToast"></ToastButton>
+    </ToastButtons>
+</SfToast>
+@if (SelectedItem is not null)
+{
+    <ClienteForm onSaveCliente="onConfirma" onCancelCliente="onCancelPopUpCliente" tipoCtaCteList="tipoCtaCteList" PedidosList="PedidosList" SelectedItem="SelectedItem" />
+}
+
+@if (PedidoSelectedItem is not null)
+{
+    @*  @if (PedidoSelectedItem.CUIT is not null)
+    {*@
+    <PedidoForm onSavePedido="onPedidoConfirma" onCancelPedido="onPedidoCancelPopUpCliente" lugaresEntregaList="LugarEntregaList" SelectedItem="PedidoSelectedItem" />
+    @*  }*@
+}
+
+@if (LugarEntregaSelectedItem is not null)
+{
+    <LugarDeEntregaForm onSaveLugarEntrega="onLugarEntregaConfirma" onCancelLugarEntrega="onLugarEntregaCancelPopUp"  SelectedItem="LugarEntregaSelectedItem" />
+}
+
+
+<button class="btn btn-success" type="button" @onclick="@(() => NewOnClick())">Nuevo Cliente</button>
+
+
+
+
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <Label style="color:darkblue;font-weight:bold;font-size:large">Clientes</Label>
+            <SfGrid DataSource="@ClientesList" AllowSorting="true" AllowFiltering="true" AllowExcelExport="true" AllowPdfExport="true"
+                    ContextMenuItems="@(new List<object>() { "AutoFit", "AutoFitAll", "SortAscending", "SortDescending","Copy", "Cancel","PdfExport", "ExcelExport", "CsvExport", "FirstPage", "PrevPage","LastPage", "NextPage"})" AllowPaging="true">
+
+                  <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
+                <GridEvents TValue="Cliente" CommandClicked="OnCommandClicked" RowDataBound="RowBound"></GridEvents>
+                <GridTemplates>
+                    <DetailTemplate>
+                        @{
+                            var clienteAux = (context as Cliente);
+                            <Label style="color:darkblue;font-weight:bold;font-size:large">Pedidos</Label>
+                            //<button class="btn btn-success" type="button" @onclick="@(() => NewPedidoOnClick())">Nuevo Pedido</button>
+
+                            <SfGrid DataSource="@PedidosList" TValue="Pedido" Query="@GetEmployeesQuery(clienteAux)" AllowSorting="true" AllowExcelExport="true" AllowPdfExport="true"
+                                ContextMenuItems="@(new List<object>() { "AutoFit", "AutoFitAll", "SortAscending", "SortDescending","Copy", "Edit", "Delete", "Save", "Cancel","PdfExport", "ExcelExport", "CsvExport", "FirstPage", "PrevPage","LastPage", "NextPage"})" AllowPaging="true">
+                                 <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
+                                <GridEvents TValue="Pedido" CommandClicked="OnCommandPedidoClicked" RowDataBound="RowBound"></GridEvents>
+                                <GridPageSettings PageSize="8"></GridPageSettings>
+
+
+
+
+                                <GridTemplates>
+                                    <DetailTemplate Context="CustomerContext">
+                                        @{
+                                            var pedido = (CustomerContext as Pedido);
+                                            <Label style="color:darkblue;font-weight:bold;font-size:large">Lugares de Entrega</Label>
+                                            // <button class="btn btn-success" type="button" @onclick="@(() => NewOnClick())">Nuevo Lugar de Entrega</button>
+
+                                            <SfGrid DataSource="@LugarEntregaList" TValue="LugarEntrega" Query="@GetOrderQuery(pedido)" AllowSorting="true" AllowExcelExport="true" AllowPdfExport="true"
+                                            ContextMenuItems="@(new List<object>() { "AutoFit", "AutoFitAll", "SortAscending", "SortDescending","Copy", "Edit", "Delete", "Save", "Cancel","PdfExport", "ExcelExport", "CsvExport", "FirstPage", "PrevPage","LastPage", "NextPage"})" AllowPaging="true">
+
+                                                <GridEvents TValue="LugarEntrega" RowDataBound="RowBound"></GridEvents>
+                                                <GridColumns>
+                                                    <GridColumn Field=@nameof(LugarEntrega.NumeroPedido) HeaderText="NumeroPedido" Width="110">
+                                                    </GridColumn>
+                                                    <GridColumn Field=@nameof(LugarEntrega.Calle) HeaderText="Calle" Width="110">
+
+                                                    </GridColumn>
+                                                    <GridColumn Field=@nameof(LugarEntrega.Numero) HeaderText="Numero" Width="110"></GridColumn>
+                                                    <GridColumn Field=@nameof(LugarEntrega.HoraDesde) HeaderText="Hora Desde" Width="50"></GridColumn>
+                                                    <GridColumn Field=@nameof(LugarEntrega.HoraHasta) HeaderText="Hora Hasta" Width="50"></GridColumn>
+                                                    <GridColumn Field=@nameof(LugarEntrega.CP) HeaderText="CP" Width="110"></GridColumn>
+                                                </GridColumns>
+                                            </SfGrid>
+                                        }
+                                    </DetailTemplate>
+                                </GridTemplates>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <GridColumns>
+                                    <GridColumn Field=@nameof(Pedido.Fecha) HeaderText="Fecha" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="90"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.Hora) HeaderText="Hora" TextAlign="TextAlign.Right" Width="40"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.NumeroPedido) HeaderText="NumeroPedido" Width="50"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.Precio) HeaderText="Precio" Width="70"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.Articulo) HeaderText="Articulo" Width="110"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.FechaDesde) HeaderText="P.EntregaDesde" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="80"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.FechaHasta) HeaderText="P.EntregaHasta" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="80"></GridColumn>
+                                    <GridColumn Field=@nameof(Pedido.Descripcion) HeaderText="Descripcion" Width="110"></GridColumn>
+
+                                    <GridColumn HeaderText="Funciones" Width="150">
+                                        <GridCommandColumns>
+                                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Nuevo Lugar", CssClass = "e-flat" })"></GridCommandColumn>
+                                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Editar", CssClass = "e-flat" })"></GridCommandColumn>
+                                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Borrar", CssClass = "e-flat" })"></GridCommandColumn>
+                                        </GridCommandColumns>
+                                    </GridColumn>
+                                </GridColumns>
+                            </SfGrid>
+                        }
+                    </DetailTemplate>
+                </GridTemplates>
+
+
+
+
+
+                <GridColumns>
+                    <GridColumn Field=@nameof(Cliente.CUIT) HeaderText="CUIT" TextAlign="TextAlign.Right" Width="80"></GridColumn>
+                    <GridColumn Field=@nameof(Cliente.Nombre) HeaderText="Nombre" Width="80"></GridColumn>
+                    <GridColumn Field=@nameof(Cliente.Mail) HeaderText="Mail" Width="110"></GridColumn>
+                    <GridColumn Field=@nameof(Cliente.FechaAlta) HeaderText="FechaAlta" Width="50" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right"> </GridColumn>
+                    <GridColumn Field=@nameof(Cliente.TipoCliente) HeaderText="TipoCliente" Width="70"></GridColumn>
+
+                    <GridColumn Field=@nameof(Cliente.Habilitado) HeaderText="Habilitado" DisplayAsCheckBox="true" Width="40"></GridColumn>
+
+                    <GridColumn HeaderText="Funciones" Width="150">
+                        <GridCommandColumns>
+                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Nuevo Pedido", CssClass = "e-flat" })"></GridCommandColumn>
+
+                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Editar", CssClass = "e-flat" })"></GridCommandColumn>
+                            <GridCommandColumn ButtonOption="@(new CommandButtonOptions() { Content = "Borrar", CssClass = "e-flat" })"></GridCommandColumn>
+                        </GridCommandColumns>
+                    </GridColumn>
+                </GridColumns>
+            </SfGrid>
+
+        </div>
+    </div>
+</div>
+<style>
+    .e-toast-icon.e-laura.e-icons {
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(https://localhost:7083/logo.png);
+        height: 26px !important;
+        margin: 0 10px 0 0;
+        width: 39px;
+    }
+
+    #elementToastTime .e-toast-message {
+        padding: 10px;
+    }
+
+    .Celeste-1 {
+        background-color: #b2dafa;
+    }
+
+    .Celeste-2 {
+        background-color: #84b6f4;
+    }
+
+    .Celeste-3 {
+        background-color: #6a9eda;
+    }
+
+    .div-1 {
+        background-color: lightskyblue;
+    }
+
+    .e-grid .e-gridheader {
+        background-color: blue;
+    }
+
+    /*.e-headercell {
+                                                                                                                                        color: lightblue;
+                                                                                                                                        font-size: 1.5rem;
+                                                                                                                                        font-weight: bold;
+                                                                                                                                    } */
+</style>
+
+@code {
+
+    public string SelectedCustomer { get; set; }
+    public int? RowIndex { get; set; } = 1003;
+
+
+
+    Cliente SelectedItem { get; set; }
+    Cliente SelectedDeleteItem { get; set; }
+
+    Pedido PedidoSelectedItem { get; set; }
+    Pedido PedidoSelectedDeleteItem { get; set; }
+
+    LugarEntrega LugarEntregaSelectedItem { get; set; }
+    LugarEntrega LugarEntregaSelectedDeleteItem { get; set; }
+
+    private List<TipoCtaCte> tipoCtaCteList = new List<TipoCtaCte>();
+    private List<Cliente> ClientesList = new List<Cliente>();
+    private List<Pedido> PedidosList = new List<Pedido>();
+    private List<LugarEntrega> LugarEntregaList = new List<LugarEntrega>();
+
+
+
+
+    SfToast ToastObj;
+    SfToast ToastPedidoObj;
+    SfToast ToastLugarEntregaObj;
+
+    private async Task ShowToast()
+    {
+        await this.ToastObj.ShowAsync();
+    }
+
+
+
+
+
+
+
+
+
+
+    protected override async void OnInitialized()
+    {
+        tipoCtaCteList = await Domain.CargarTipoCtaCteList();
+        ClientesList = await Domain.CargarClientesList();
+        PedidosList = await Domain.CargarPedidoList();
+        LugarEntregaList = await Domain.CargarLugarEntregaList();
+
+        await ClientesSaveToLocalStorage(ClientesList);
+        await PedidosSaveToLocalStorage(PedidosList);
+        await LugarEntregaSaveToLocalStorage(LugarEntregaList);
+
+        ClientesList = await ClientesGetFromLocalStorage();
+        PedidosList = await PedidosGetFromLocalStorage();
+        LugarEntregaList = await LugarEntregasGetFromLocalStorage();
+    }
+
+
+
+    #region Cliente Methods
+    public async void OnCommandClicked(CommandClickEventArgs<Cliente> args)
+    {
+        if (args.CommandColumn.ButtonOption.Content.Equals("Editar"))
+        {
+            SelectedItem = args.RowData;
+
+
+        }
+        if (args.CommandColumn.ButtonOption.Content.Equals("Borrar"))
+        {
+            SelectedDeleteItem = args.RowData;
+            await this.ToastObj.ShowAsync();
+        }
+        if (args.CommandColumn.ButtonOption.Content.Contains("Pedido"))
+        {
+            Cliente clienteAux = args.RowData;
+
+            List<Pedido> PedidosAuxList = await PedidosGetFromLocalStorage();
+
+
+            var maxNumeroPedido = PedidosAuxList.Max(x => x.NumeroPedido);
+            PedidoSelectedItem = new Pedido();
+            //    PedidoSelectedItem.CUIT = clienteAux.CUIT.Substring(0, 2) + "-" + clienteAux.CUIT.Substring(2, 8) + "-" + clienteAux.CUIT.Substring(10, 1);
+            PedidoSelectedItem.CUIT = clienteAux.CUIT;
+
+            PedidoSelectedItem.NumeroPedido = maxNumeroPedido + 1;
+            PedidoSelectedItem.Fecha = DateTime.Today;
+            PedidoSelectedItem.FechaDesde = DateTime.Today;
+            PedidoSelectedItem.FechaHasta = DateTime.Today;
+            RangoFechas rangoFechas= new  RangoFechas();
+            rangoFechas.FechaDesde = DateTime.Today;
+             rangoFechas.FechaHasta = DateTime.Today;
+            PedidoSelectedItem.PlazoEntrega = rangoFechas;
+            
+        }
+    }
+    private async Task EliminarRegistro()
+    {
+        Cliente clienteSelected = SelectedDeleteItem;
+
+        List<Cliente> ClientesAuxList = await ClientesGetFromLocalStorage();
+
+
+
+        Cliente clienteAux = (from c in ClientesAuxList
+                              where c.CUIT == clienteSelected.CUIT
+                              select c).FirstOrDefault();
+
+        if (clienteAux != null)
+        {
+            ClientesAuxList.Remove(clienteAux);
+        }
+
+
+        ClientesAuxList = (from c in ClientesAuxList
+                           orderby c.CUIT descending
+                           select c).ToList();
+
+
+
+        await ClientesSaveToLocalStorage(ClientesAuxList);
+
+        ClientesList = await ClientesGetFromLocalStorage();
+
+        await this.ToastObj.HideAsync();
+    }
+    private async Task NewOnClick()
+    {
+        SelectedItem = new Cliente();
+        SelectedItem.Habilitado = true;
+        SelectedItem.FechaAlta = DateTime.Today;
+    }
+    private async Task CancelarEliminarRegistro()
+    {
+        await this.ToastObj.HideAsync();
+    }
+    private async Task onConfirma(Cliente ClientesAux)
+    {
+
+
+        if (!(new System.ComponentModel.DataAnnotations.EmailAddressAttribute().IsValid(ClientesAux.Mail)))
+        {
+            var mensajeError = "El Mail debe ser Valido";
+            await mostrarMensajes.MostrarMensajeError(mensajeError);
+            return;
+        }
+
+        if (ClientesAux.CUIT.Length < 11)
+        {
+            var mensajeError = "El Cuit debe tener 11 caracteres";
+            await mostrarMensajes.MostrarMensajeError(mensajeError);
+            return;
+        }
+        string CUIT = ClientesAux.CUIT.Substring(0, 2) + "-" + ClientesAux.CUIT.Substring(2, 8) + "-" + ClientesAux.CUIT.Substring(10, 1);
+
+        List<Cliente> ClientesAuxList = await ClientesGetFromLocalStorage();
+
+        Cliente clienteAux = (from c in ClientesAuxList
+                              where c.CUIT == CUIT
+                              select c).FirstOrDefault();
+
+        if (clienteAux != null)
+        {
+            ClientesAuxList.Remove(clienteAux);
+        }
+        ClientesAux.CUIT = CUIT;
+        ClientesAuxList.Add(ClientesAux);
+
+
+        await ClientesSaveToLocalStorage(ClientesAuxList);
+        ClientesList = await ClientesGetFromLocalStorage();
+
+        SelectedItem = null;
+
+
+    }
+    private async Task onCancelPopUpCliente()
+    {
+        SelectedItem = null;
+    }
+    private async Task HideToast()
+    {
+        await this.ToastObj.HideAsync();
+    }
+    #endregion
+
+    #region Pedido Methods
+    public async void OnCommandPedidoClicked(CommandClickEventArgs<Pedido> args)
+    {
+        if (args.CommandColumn.ButtonOption.Content.Equals("Editar"))
+        {
+            PedidoSelectedItem = args.RowData;
+
+
+        }
+        if (args.CommandColumn.ButtonOption.Content.Equals("Borrar"))
+        {
+            PedidoSelectedDeleteItem = args.RowData;
+            await this.ToastPedidoObj.ShowAsync();
+
+        }
+         if (args.CommandColumn.ButtonOption.Content.Contains("Lugar"))
+        {
+            Pedido pedidoAux = args.RowData;
+
+            List<LugarEntrega> LugarEntregaAuxList = await LugarEntregasGetFromLocalStorage();
+
+
+            var maxIdLugarEntrega = LugarEntregaAuxList.Max(x => x.LugarEntregaId);
+            LugarEntregaSelectedItem = new LugarEntrega();
+            //    PedidoSelectedItem.CUIT = clienteAux.CUIT.Substring(0, 2) + "-" + clienteAux.CUIT.Substring(2, 8) + "-" + clienteAux.CUIT.Substring(10, 1);
+            LugarEntregaSelectedItem.NumeroPedido = pedidoAux.NumeroPedido;
+
+            LugarEntregaSelectedItem.LugarEntregaId = maxIdLugarEntrega + 1;
+          
+            
+        }
+    }
+    private async Task EliminarPedidoRegistro()
+    {
+        Pedido pedidoSelected = PedidoSelectedDeleteItem;
+
+        List<Pedido> PedidosAuxList = await PedidosGetFromLocalStorage();
+
+
+
+        Pedido pedidoAux = (from c in PedidosAuxList
+                            where c.NumeroPedido == pedidoSelected.NumeroPedido
+                            select c).FirstOrDefault();
+
+        if (pedidoAux != null)
+        {
+            PedidosAuxList.Remove(pedidoAux);
+        }
+
+
+
+
+        await PedidosSaveToLocalStorage(PedidosAuxList);
+
+        PedidosList = await PedidosGetFromLocalStorage();
+
+        await this.ToastObj.HideAsync();
+    }
+    private async Task NewPedidoOnClick()
+    {
+        PedidoSelectedItem = new Pedido();
+        PedidoSelectedItem.Fecha = DateTime.Today;
+        PedidoSelectedItem.FechaDesde = DateTime.Today;
+        PedidoSelectedItem.FechaHasta = DateTime.Today;
+        PedidoSelectedItem.PlazoEntrega.FechaDesde = DateTime.Today;
+        PedidoSelectedItem.PlazoEntrega.FechaHasta = DateTime.Today;
+    }
+    private async Task CancelarEliminarPedidoRegistro()
+    {
+        await this.ToastObj.HideAsync();
+    }
+    private async Task onPedidoConfirma(Pedido PedidoAux)
+    {
+
+
+        List<Pedido> PedidosAuxList = await PedidosGetFromLocalStorage();
+
+        Pedido pedidoAux = (from c in PedidosAuxList
+                            where c.NumeroPedido == PedidoSelectedItem.NumeroPedido
+                            select c).FirstOrDefault();
+
+        if (pedidoAux != null)
+        {
+            PedidosAuxList.Remove(pedidoAux);
+        }
+        PedidoAux.CUIT = PedidoAux.CUIT.Substring(0, 2) + "-" + PedidoAux.CUIT.Substring(2, 8) + "-" + PedidoAux.CUIT.Substring(10, 1);
+        PedidosAuxList.Add(PedidoAux);
+
+
+        await PedidosSaveToLocalStorage(PedidosAuxList);
+        PedidosList = await PedidosGetFromLocalStorage();
+        ClientesList = await ClientesGetFromLocalStorage();
+        PedidoSelectedItem = null;
+
+
+    }
+    private async Task onPedidoCancelPopUpCliente()
+    {
+        PedidoSelectedItem = null;
+    }
+    private async Task HidePedidoToast()
+    {
+        await this.ToastPedidoObj.HideAsync();
+    }
+    #endregion
+
+
+    #region LugarEntrega Methods
+    public async void OnCommandLugarEntregaClicked(CommandClickEventArgs<LugarEntrega> args)
+    {
+        if (args.CommandColumn.ButtonOption.Content.Equals("Editar"))
+        {
+            LugarEntregaSelectedItem = args.RowData;
+
+
+        }
+        if (args.CommandColumn.ButtonOption.Content.Equals("Borrar"))
+        {
+            LugarEntregaSelectedDeleteItem = args.RowData;
+            await this.ToastPedidoObj.ShowAsync();
+
+        }
+         if (args.CommandColumn.ButtonOption.Content.Contains("Lugar"))
+        {
+            LugarEntrega pLugarEntregaAux = args.RowData;
+
+            List<LugarEntrega> LugarEntregaAuxList = await LugarEntregasGetFromLocalStorage();
+
+
+            //var maxIdLugarEntrega = LugarEntregaAuxList.Max(x => x.LugarEntregaId);
+            //LugarEntregaSelectedItem = new LugarEntrega();
+            ////    PedidoSelectedItem.CUIT = clienteAux.CUIT.Substring(0, 2) + "-" + clienteAux.CUIT.Substring(2, 8) + "-" + clienteAux.CUIT.Substring(10, 1);
+            //LugarEntregaSelectedItem.NumeroPedido = pedidoAux.NumeroPedido;
+
+            //LugarEntregaSelectedItem.LugarEntregaId = maxIdLugarEntrega + 1;
+          
+            
+        }
+    }
+    private async Task EliminarLugarEntregaRegistro()
+    {
+        Pedido pedidoSelected = PedidoSelectedDeleteItem;
+
+        List<Pedido> PedidosAuxList = await PedidosGetFromLocalStorage();
+
+
+
+        Pedido pedidoAux = (from c in PedidosAuxList
+                            where c.NumeroPedido == pedidoSelected.NumeroPedido
+                            select c).FirstOrDefault();
+
+        if (pedidoAux != null)
+        {
+            PedidosAuxList.Remove(pedidoAux);
+        }
+
+
+
+
+        await PedidosSaveToLocalStorage(PedidosAuxList);
+
+        PedidosList = await PedidosGetFromLocalStorage();
+
+        await this.ToastObj.HideAsync();
+    }
+    private async Task NewLugarEntregaOnClick()
+    {
+        PedidoSelectedItem = new Pedido();
+        PedidoSelectedItem.Fecha = DateTime.Today;
+        PedidoSelectedItem.FechaDesde = DateTime.Today;
+        PedidoSelectedItem.FechaHasta = DateTime.Today;
+        PedidoSelectedItem.PlazoEntrega.FechaDesde = DateTime.Today;
+        PedidoSelectedItem.PlazoEntrega.FechaHasta = DateTime.Today;
+    }
+    private async Task CancelarEliminarLugarEntregaRegistro()
+    {
+        await this.ToastObj.HideAsync();
+    }
+    private async Task onLugarEntregaConfirma(LugarEntrega LugarEntregaAux)
+    {
+
+
+        List<LugarEntrega> LugarEntregasAuxList = await LugarEntregasGetFromLocalStorage();
+
+        LugarEntrega lugarEntregaAux = (from c in LugarEntregasAuxList
+                            where c.LugarEntregaId == LugarEntregaSelectedItem.LugarEntregaId
+                            select c).FirstOrDefault();
+
+        if (lugarEntregaAux != null)
+        {
+            LugarEntregasAuxList.Remove(lugarEntregaAux);
+        }
+        LugarEntregasAuxList.Add(LugarEntregaAux);
+
+
+        await LugarEntregaSaveToLocalStorage(LugarEntregasAuxList);
+        LugarEntregaList = await LugarEntregasGetFromLocalStorage();
+      
+       LugarEntregaSelectedItem = null;
+
+
+    }
+    private async Task onLugarEntregaCancelPopUp()
+    {
+        PedidoSelectedItem = null;
+    }
+    private async Task HideLugarEntregaToast()
+    {
+        await this.ToastPedidoObj.HideAsync();
+    }
+    #endregion
+
+    public void RowBound(RowDataBoundEventArgs<Cliente> args)
+    {
+        //  args.Row.AddClass(new string[] { "Celeste-1" });
+    }
+    public void RowBound(RowDataBoundEventArgs<Pedido> args)
+    {
+        // args.Row.AddClass(new string[] { "Celeste-2" });
+        ((Pedido)args.Data).FechaDesde = ((Pedido)args.Data).PlazoEntrega.FechaDesde;
+        ((Pedido)args.Data).FechaHasta = ((Pedido)args.Data).PlazoEntrega.FechaHasta;
+    }
+    public void RowBound(RowDataBoundEventArgs<LugarEntrega> args)
+    {
+        //   args.Row.AddClass(new string[] { "Celeste-3" });
+        ((LugarEntrega)args.Data).HoraDesde = ((LugarEntrega)args.Data).FranjaHoraria.HoraDesde;
+        ((LugarEntrega)args.Data).HoraHasta = ((LugarEntrega)args.Data).FranjaHoraria.HoraHasta;
+    }
+
+
+    public Query GetOrderQuery(Pedido value)
+    {
+        return new Query().Where("NumeroPedido", "equal", value.NumeroPedido);
+    }
+    public Query GetEmployeesQuery(Cliente value)
+    {
+        return new Query().Where("CUIT", "equal", value.CUIT);
+    }
+
+    #region LocalStorage Methods
+    private async Task<List<Cliente>> ClientesGetFromLocalStorage()
+    {
+        #region Get ClientesList
+        string clientesListJson = await JsRuntime.GetFromLocalStorage("ClientesListJson");
+        List<Cliente> ClientesAuxList = JsonSerializer.Deserialize<List<Cliente>>(clientesListJson);
+        ClientesAuxList = (from c in ClientesAuxList
+                           orderby c.CUIT ascending
+                           select c).ToList();
+
+        #endregion
+        return ClientesAuxList;
+    }
+    private async Task ClientesSaveToLocalStorage(List<Cliente> ClientesAuxList)
+    {
+        string clientesListJson = JsonSerializer.Serialize(ClientesAuxList);
+        await JsRuntime.SetInLocalStorage("ClientesListJson", clientesListJson);
+    }
+
+    private async Task<List<Pedido>> PedidosGetFromLocalStorage()
+    {
+        #region Get PedidosList
+        string pedidosListJson = await JsRuntime.GetFromLocalStorage("PedidosListJson");
+        List<Pedido> PedidosAuxList = JsonSerializer.Deserialize<List<Pedido>>(pedidosListJson);
+        PedidosAuxList = (from c in PedidosAuxList
+                          orderby c.NumeroPedido ascending
+                          select c).ToList();
+
+        #endregion
+        return PedidosAuxList;
+    }
+    private async Task PedidosSaveToLocalStorage(List<Pedido> PedidosAuxList)
+    {
+        string pedidosListJson = JsonSerializer.Serialize(PedidosAuxList);
+        await JsRuntime.SetInLocalStorage("PedidosListJson", pedidosListJson);
+    }
+
+    private async Task<List<LugarEntrega>> LugarEntregasGetFromLocalStorage()
+    {
+        #region Get PedidosList
+        string lugarEntregasListJson = await JsRuntime.GetFromLocalStorage("LugarEntregasListJson");
+        List<LugarEntrega> LugarEntregasAuxList = JsonSerializer.Deserialize<List<LugarEntrega>>(lugarEntregasListJson);
+        LugarEntregasAuxList = (from c in LugarEntregasAuxList
+                                orderby c.NumeroPedido ascending
+                                select c).ToList();
+
+        #endregion
+        return LugarEntregasAuxList;
+    }
+    private async Task LugarEntregaSaveToLocalStorage(List<LugarEntrega> LugarEntregasAuxList)
+    {
+        string lugarEntregasListJson = JsonSerializer.Serialize(LugarEntregasAuxList);
+        await JsRuntime.SetInLocalStorage("LugarEntregasListJson", lugarEntregasListJson);
+    }
+    #endregion
+
+
+
+
+
+
+
+
+    }

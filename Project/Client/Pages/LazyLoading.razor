@@ -1,0 +1,39 @@
+﻿
+@page "/LazyLoading"
+@inject IRepositorio repositorio
+@inject IMostrarMensajes mostrarMensajes
+@inject NavigationManager navigationManager
+@using System.Threading
+
+<h1>Lazy Loading</h1>
+
+
+<button class="btn btn-primary" onclick="GetColor"> Get Color From ColorAssembly.dll</button>
+@if (color == null)
+{
+
+
+    <p><em>Loading Color...</em></p>
+}
+else
+{
+    <p><em>Color : @color</em></p>
+    <button style="background-color:@color;width:100px;height:50px"></button>
+
+}
+
+
+@code {
+    string color;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+         color = ColorAssembly.ColorHelper.GetColor();
+    }
+    private void GetColor()
+        {
+
+        }
+}

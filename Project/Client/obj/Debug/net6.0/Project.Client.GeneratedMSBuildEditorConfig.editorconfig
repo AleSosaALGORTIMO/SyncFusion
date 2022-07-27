@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = Project.Client
+build_property.RootNamespace = Project.Client
+build_property.ProjectDir = D:\JM2\WP\Demos\BlazorSuiteComponentes\SyncFusion\Project\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\JM2\WP\Demos\BlazorSuiteComponentes\SyncFusion\Project\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/Clientes/ClienteFormulario.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50ZXNcQ2xpZW50ZUZvcm11bGFyaW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/Demos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/LazyLoading.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGF6eUxvYWRpbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/ClienteForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxDbGllbnRlRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/IndexSyncFusion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxJbmRleFN5bmNGdXNpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/LugarDeEntregaForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxMdWdhckRlRW50cmVnYUZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/PedidoForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxQZWRpZG9Gb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/SyncFusionABM.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxTeW5jRnVzaW9uQUJNLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/SyncFusionDataGridTest.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxTeW5jRnVzaW9uRGF0YUdyaWRUZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/SyncFusionHierarchy.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxTeW5jRnVzaW9uSGllcmFyY2h5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/SyncFusion/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxUZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/ForecastTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9yZWNhc3RUYWJsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-epkn59ifji
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Pages/Virtualization.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbGl6YXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9d3l49rj4h
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1xo6x79mij
+
+[D:/JM2/WP/Demos/BlazorSuiteComponentes/SyncFusion/Project/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9hqr6czkco

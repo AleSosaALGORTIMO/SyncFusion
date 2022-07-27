@@ -1,0 +1,247 @@
+﻿@using static Project.Client.Pages.SyncFusion.SyncFusionABM
+@using Project.Client.Pages.Clientes
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Calendars
+
+@using System.Text.Json
+@using static Project.Client.Pages.Clientes.Domain
+@inject IJSRuntime JsRuntime
+<div class="modal-backdrop show"></div>
+
+<div class="modal fade show" id="exampleModal" tabindex="-1"
+     role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" style="display: block;display: flex;justify-content: center;align-items: center;">
+
+    <div class="modal-dialog" role="document" style="        width: 1000px;
+        top: 0px;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+">
+        <div class="modal-content">
+
+            <div class="modal-body" style="padding:0;margin:10px">
+
+
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Habilitado</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfSwitch @bind-Checked="@SelectedItem.Habilitado"></SfSwitch>
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">CUIT</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfMaskedTextBox Mask="00-00000000-0" @bind-Value="@SelectedItem.CUIT"
+                                         Enabled="@(SelectedItem.CUIT.Length<11)"></SfMaskedTextBox>
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Nombre</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfTextBox Type="Syncfusion.Blazor.Inputs.InputType.Text" @bind-Value="@SelectedItem.Nombre" Placeholder="Nombre" Enabled="@SelectedItem.Habilitado"></SfTextBox>
+                        @* <ValidationMessage For="@(() => Syncfusion.Blazor.Inputs.InputType.Email)" />*@
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Fecha de Alta</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfDatePicker TValue="DateTime" @bind-Value="@SelectedItem.FechaAlta" Placeholder="Seleccione Fecha" ShowClearButton="true" Enabled="@SelectedItem.Habilitado"></SfDatePicker>
+                    </div>
+                </div>
+
+
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Mail</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfTextBox Type="Syncfusion.Blazor.Inputs.InputType.Email" @bind-Value="@SelectedItem.Mail" Placeholder="Enter Email" Enabled="@SelectedItem.Habilitado"></SfTextBox>
+                        @* <ValidationMessage For="@(() => Syncfusion.Blazor.Inputs.InputType.Email)" />*@
+                    </div>
+                </div>
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">TipoCliente</label>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
+                            <div style="display: inline-block; padding-right: 10px;">
+                                <SfRadioButton Label="Frecuente" Name="TipoCliente" Value="Frecuente" Checked="@SelectedItem.TipoCliente" Disabled="@(!SelectedItem.Habilitado)">
+                                </SfRadioButton>
+                            </div>
+                            <div style="display: inline-block;">
+                                <SfRadioButton Label="Ocasional" Name="TipoCliente" Value="Ocasional" Checked="@SelectedItem.TipoCliente" Disabled="@(!SelectedItem.Habilitado)">
+                                </SfRadioButton>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Tipo Cta.Cte.</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfMultiSelect @bind-Value="@MultiVal" TValue="int[]" Placeholder="Cta. Cte." Mode="VisualMode.CheckBox" TItem="TipoCtaCte" DataSource="@tipoCtaCteList" Enabled="@SelectedItem.Habilitado">
+                           <MultiSelectEvents TItem="TipoCtaCte" TValue="int[]" ValueChange="@TipoCtaCteListChangeHandler"></MultiSelectEvents>
+                            <MultiSelectFieldSettings Text="Descripcion" Value="Codigo"></MultiSelectFieldSettings>
+                        </SfMultiSelect>
+
+                        @* <SfListBox TValue="string[]" DataSource="@tipoCtaCteList" TItem="TipoCtaCte">
+                        <ListBoxFieldSettings Text="Descripcion" Value="Codigo" />
+                        <ListBoxSelectionSettings ShowCheckbox="true" ShowSelectAll="true"></ListBoxSelectionSettings>
+                        </SfListBox>*@
+                    </div>
+                </div>
+
+
+
+               @* <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <label style="color:black;font-size: 0.8em;align-content:end;margin-left:5px">Pedidos</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <SfMultiSelect @bind-Value="@MultiVal" TValue="int[]" Placeholder="Pedido" Mode="VisualMode.CheckBox" TItem="Pedido" DataSource="@PedidosList" Enabled="@SelectedItem.Habilitado">
+                            <MultiSelectEvents TItem="Pedido" TValue="int[]" ValueChange="@PedidoListChangeHandler"></MultiSelectEvents>
+                            <MultiSelectFieldSettings Text="Articulo" Value="NumeroPedido"></MultiSelectFieldSettings>
+                        </SfMultiSelect>
+
+
+                    </div>
+                </div>*@
+
+
+
+
+            </div>
+
+
+            <div class="modal-footer" style="        padding: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+
+                <div class="row" style="padding: 0;justify-content: center;margin-top:10px;">
+                    <div class="col-sm-6">
+                        <button @onclick="@(() => onSaveCliente.InvokeAsync(SelectedItem))" type="button" class="btn btn-success" style="width: 150px;border: 0;margin:5px">Guardar</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button @onclick="@(() => onCancelCliente.InvokeAsync())" type="button" class="btn btn-success" style="width: 150px;border: 0;margin:5px">Cancelar</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>Show something from SelectedItem: @SelectedItem.CUIT</div>
+
+@code {
+
+    [Parameter]
+    public Cliente SelectedItem { get; set; }
+
+    [Parameter]
+    public List<TipoCtaCte> tipoCtaCteList { get; set; }
+
+    [Parameter]
+    public List<Pedido> PedidosList { get; set; }
+
+    [Parameter]
+    public EventCallback<Cliente > onSaveCliente { get; set; }
+
+    [Parameter]
+    public EventCallback onCancelCliente { get; set; }
+
+    public int[] MultiVal { get; set; } = new int[] { };
+
+   protected override async void OnInitialized()
+    {
+
+        if (string.IsNullOrEmpty(SelectedItem.CUIT))
+        { SelectedItem.CUIT = string.Empty; }
+
+        MultiVal = new int[tipoCtaCteList.Count];
+
+
+
+        for (int i = 0; i < tipoCtaCteList.Count; i++)
+        {
+            for (int j = 0; j < SelectedItem.TiposCtaCte.Count; j++)
+            {
+                if (tipoCtaCteList[i].Codigo == SelectedItem.TiposCtaCte[j].Codigo)
+                    MultiVal[i] = tipoCtaCteList[i].Codigo;
+            }
+
+
+        }
+
+    }
+
+
+    private async Task onConfirma(Cliente ClientesAux)
+    {
+
+
+        await onSaveCliente.InvokeAsync(ClientesAux);
+
+
+
+
+    }
+
+    private void TipoCtaCteListChangeHandler(MultiSelectChangeEventArgs<int[]> args)
+    {
+        // Here you can customize your code
+        List<TipoCtaCte> tipoCtaListAux = new List<TipoCtaCte>();
+        for (int i = 0; i < args.Value.Length; i++)
+        {
+
+            TipoCtaCte tipoCtaCteAux = (from c in tipoCtaCteList
+                                where c.Codigo == args.Value[i]
+                                select c).FirstOrDefault();
+            if(tipoCtaCteAux!=null)
+            {
+                tipoCtaListAux.Add(tipoCtaCteAux);
+            }
+
+          
+        }
+        
+
+
+        SelectedItem.TiposCtaCte = tipoCtaListAux;
+    }
+
+}

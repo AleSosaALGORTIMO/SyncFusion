@@ -1,0 +1,18 @@
+﻿<div class="virtualized">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodigoEquivalencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @ChildContent
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

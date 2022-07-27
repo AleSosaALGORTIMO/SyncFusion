@@ -1,0 +1,107 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = Project.Client
+build_property.RootNamespace = Project.Client
+build_property.ProjectDir = C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Blazorise2/IndexBlazorise.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmxhem9yaXNlMlxJbmRleEJsYXpvcmlzZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Demos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVtb3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/DevExpress/IndexDevExpress.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2RXhwcmVzc1xJbmRleERldkV4cHJlc3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Impuesto/CrearImpuesto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wdWVzdG9cQ3JlYXJJbXB1ZXN0by5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Impuesto/EditarImpuesto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wdWVzdG9cRWRpdGFySW1wdWVzdG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Impuesto/FormImpuesto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wdWVzdG9cRm9ybUltcHVlc3RvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Impuesto/GetImpuestoById.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1wdWVzdG9cR2V0SW1wdWVzdG9CeUlkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/LazyLoading.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGF6eUxvYWRpbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/MudBlazor2/IndexMudBlazor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXVkQmxhem9yMlxJbmRleE11ZEJsYXpvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/SyncFusion/IndexSyncFusion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3luY0Z1c2lvblxJbmRleFN5bmNGdXNpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/VirtualizationPaginado.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbGl6YXRpb25QYWdpbmFkby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/ForecastTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9yZWNhc3RUYWJsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-epkn59ifji
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/Virtualization.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbGl6YXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9d3l49rj4h
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Pages/VirtualizationTodoDeUna.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbGl6YXRpb25Ub2RvRGVVbmEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-wo1qzkkhmq
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1xo6x79mij
+
+[C:/Users/alejandro.sosa/source/repos/ProjectNet6/Project/Project/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9hqr6czkco

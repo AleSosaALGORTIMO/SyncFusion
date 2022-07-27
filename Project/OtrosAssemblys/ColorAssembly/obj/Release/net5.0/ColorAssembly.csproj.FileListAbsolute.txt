@@ -1,0 +1,12 @@
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\bin\Release\net5.0\ColorAssembly.deps.json
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\bin\Release\net5.0\ColorAssembly.dll
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\bin\Release\net5.0\ref\ColorAssembly.dll
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\bin\Release\net5.0\ColorAssembly.pdb
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.csproj.AssemblyReference.cache
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.AssemblyInfoInputs.cache
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.AssemblyInfo.cs
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.csproj.CoreCompileInputs.cache
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.dll
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ref\ColorAssembly.dll
+C:\Users\alejandro.sosa\source\repos\Project\Project\OtrosAssemblys\ColorAssembly\obj\Release\net5.0\ColorAssembly.pdb

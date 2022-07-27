@@ -1,0 +1,12 @@
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\bin\Release\net6.0\Project.Shared.deps.json
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\bin\Release\net6.0\Project.Shared.dll
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\bin\Release\net6.0\Project.Shared.pdb
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.csproj.AssemblyReference.cache
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.AssemblyInfoInputs.cache
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.AssemblyInfo.cs
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.csproj.CoreCompileInputs.cache
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.dll
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\refint\Project.Shared.dll
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\Project.Shared.pdb
+C:\Users\alejandro.sosa\source\repos\ProjectNet6\Project\Project\Shared\obj\Release\net6.0\ref\Project.Shared.dll

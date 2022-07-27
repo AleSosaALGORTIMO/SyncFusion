@@ -1,0 +1,72 @@
+﻿
+@if (MostrarConfirmacion)
+{
+
+
+    <div class="modal-backdrop show"></div>
+    <div class="modal fade show" id="exampleModal" tabindex="-1"
+         role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true" style="display: block;display: flex;justify-content: center;align-items: center;">
+
+        <div class="modal-dialog" role="document" style="        width: 288px;
+        top: 0px;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+">
+            <div class="modal-content">
+
+                <div class="modal-body" style="padding:0">
+
+
+                    <img src="../images/CotizacionPopUp.jpeg" style="margin-top:0px;margin-left:0px" height="512" width="288" />
+                  
+
+                </div>
+
+
+                <div class="modal-footer" style="        padding: 0;
+        background-image: radial-gradient(circle, #803496, #70288d, #5f1c83, #4e107a, #3c0371);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+                    <button @onclick="onConfirm" type="button" class="btn btn-success" style="width: 288px;border: 0;margin:5px">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool MostrarConfirmacion = false;
+    [Parameter] public string Titulo { get; set; } = "Confirmación";
+   
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback onConfirm { get; set; }
+    //[Parameter] public EventCallback onModoComodo { get; set; }
+
+    public void Mostrar() => MostrarConfirmacion = true;
+    public void Ocultar() => MostrarConfirmacion = false;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+
+
+    }
+
+
+
+
+    void onCancel()
+    {
+        MostrarConfirmacion = false;
+    }
+
+
+
+}
